@@ -4,9 +4,17 @@ import NewsCard from '../components/NewsCard';
 import { getBaseUrl } from '../helpers/utils';
 
 const Page = () => {
-    // const response = await fetch(`${getBaseUrl()}/api/news`);
-    // const data = await response.json();
-    const [newsData, setNewsData] = useState<any>();
+    type NewsData = {
+        articles: [];
+    };
+
+    type Article = {
+        title: string;
+        description: string;
+        urlToImage: string;
+        publishedAt: string;
+    };
+    const [newsData, setNewsData] = useState<NewsData>();
 
     useEffect(() => {
         fetchNews();
@@ -24,7 +32,7 @@ const Page = () => {
         <main className="flex flex-row items-center font-inter justify-center relative">
             <div className="max-w-[500px] w-full min-h-screen">
                 <section className="flex flex-col items-center justify-center p-4 gap-4 w-full">
-                    {newsData?.articles?.map((article: any) => {
+                    {newsData?.articles?.map((article: Article) => {
                         return (
                             <NewsCard
                                 key={article.title}
